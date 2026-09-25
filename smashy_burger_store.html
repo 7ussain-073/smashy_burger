@@ -1,0 +1,1080 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Smashy Burger</title>
+    <meta name="description" content="Smashy Burger — Smash it. Taste it.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg: #080909;
+            --card: #111313;
+            --y: #ffc928;
+            --muted: #a5a6a3;
+            --line: #292b2a;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: Inter, Arial, sans-serif;
+            background: var(--bg);
+            color: #f5f5f2;
+            overflow-x: hidden;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            font-family: inherit;
+            border: none;
+            cursor: pointer;
+            background: none;
+            outline: none;
+        }
+
+        .container {
+            width: min(1160px, 92%);
+            margin: auto;
+        }
+
+        header {
+            position: fixed;
+            z-index: 50;
+            inset: 0 0 auto;
+            background: #080909dd;
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #ffffff0d;
+        }
+        
+        .nav {
+            height: 74px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            font: 30px 'Bebas Neue';
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logo span {
+            color: var(--y);
+        }
+        
+        nav {
+            display: flex;
+            gap: 28px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        
+        nav a:hover {
+            color: var(--y);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--y);
+            color: #111;
+            padding: 13px 20px;
+            border-radius: 999px;
+            font-weight: 800;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            background: #e6b524;
+        }
+
+        .cart-toggle-btn {
+            position: relative;
+            background: transparent;
+            color: var(--y);
+            border: 1px solid var(--y);
+            padding: 10px 20px;
+            border-radius: 999px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+
+        .cart-toggle-btn:hover {
+            background: var(--y);
+            color: #111;
+        }
+
+        .cart-badge {
+            background: red;
+            color: white;
+            font-size: 11px;
+            font-weight: 900;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            border: 2px solid var(--bg);
+        }
+
+        .hero {
+            min-height: 760px;
+            padding-top: 74px;
+            display: grid;
+            align-items: center;
+            background: linear-gradient(90deg, #080909 0%, #080909 38%, #08090966 62%, #08090910), 
+                        linear-gradient(0deg, #080909, transparent 25%, transparent 80%, #080909), 
+                        url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1800&q=85') center/cover;
+        }
+        
+        .kicker {
+            color: var(--y);
+            font-weight: 800;
+            letter-spacing: 5px;
+            font-size: 13px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+        
+        h1 {
+            font: clamp(75px, 10vw, 132px)/.84 'Bebas Neue';
+            letter-spacing: 2px;
+        }
+        
+        h1 span {
+            color: var(--y);
+        }
+        
+        .hero p {
+            max-width: 440px;
+            color: #d0d0cd;
+            margin: 25px 0;
+            font-size: 17px;
+            line-height: 1.5;
+        }
+        
+        .section {
+            padding: 95px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        
+        .section-title h2, .why h2 {
+            font: 58px 'Bebas Neue';
+            color: var(--y);
+            letter-spacing: 2px;
+        }
+        
+        .section-title p {
+            color: var(--muted);
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        
+        .subhead {
+            font: 32px 'Bebas Neue';
+            margin: 48px 0 18px;
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 10px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        
+        .small-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        .card {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: .2s;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: #444;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+        
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .card-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        
+        .card h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            font-weight: 800;
+        }
+        
+        .card p {
+            font-size: 13px;
+            color: var(--muted);
+            min-height: 40px;
+            line-height: 1.4;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+        
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .price {
+            color: var(--y);
+            font-weight: 800;
+            font-size: 18px;
+        }
+
+        .add-btn {
+            background: #2a2a2a;
+            color: var(--y);
+            width: 35px;
+            height: 35px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: 0.2s;
+        }
+
+        .add-btn:hover {
+            background: var(--y);
+            color: #111;
+        }
+
+        .why {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: #0e1010;
+        }
+        
+        .why-photo {
+            min-height: 400px;
+            background: url('https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=1200&q=85') center/cover;
+        }
+        
+        .why-copy {
+            padding: 60px 7%;
+            align-self: center;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .feature {
+            border-top: 1px solid var(--line);
+            padding-top: 16px;
+        }
+
+        .feature i {
+            color: var(--y);
+            font-size: 24px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .feature b {
+            font-size: 15px;
+        }
+        
+        .feature span {
+            display: block;
+            color: var(--muted);
+            font-size: 13px;
+            margin-top: 5px;
+        }
+        
+        .cta {
+            background: var(--y);
+            color: #111;
+            padding: 60px 0;
+        }
+        
+        .cta-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .cta h2 {
+            font: 55px 'Bebas Neue';
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        
+        .dark-btn {
+            background: #111;
+            color: var(--y);
+        }
+
+        .dark-btn:hover {
+            background: #222;
+        }
+
+        footer {
+            padding: 80px 0 30px;
+            border-top: 1px solid var(--line);
+            background: var(--card);
+        }
+        
+        .foot {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+            gap: 40px;
+        }
+        
+        .foot h3 {
+            font: 40px 'Bebas Neue';
+            color: var(--y);
+        }
+        
+        .foot h4 {
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .foot p, .foot a {
+            display: block;
+            color: var(--muted);
+            font-size: 14px;
+            margin: 8px 0;
+            transition: 0.2s;
+        }
+
+        .foot a:hover {
+            color: var(--y);
+        }
+        
+        .map-placeholder {
+            width: 100%;
+            height: 120px;
+            background: url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=600&q=80') center/cover;
+            border-radius: 8px;
+            opacity: 0.6;
+            margin-top: 10px;
+            border: 1px solid var(--line);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .copy {
+            border-top: 1px solid var(--line);
+            margin-top: 60px;
+            padding-top: 25px;
+            color: #686b68;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .cart-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(4px);
+            z-index: 90;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .cart-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 420px;
+            max-width: 100%;
+            background: var(--card);
+            border-left: 1px solid var(--line);
+            z-index: 100;
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+        }
+        .cart-sidebar.active {
+            transform: translateX(0);
+        }
+
+        .cart-header {
+            padding: 25px;
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h2 {
+            font: 32px 'Bebas Neue';
+            color: var(--y);
+            letter-spacing: 1px;
+        }
+
+        .close-cart {
+            color: var(--muted);
+            font-size: 24px;
+        }
+        .close-cart:hover { color: #fff; }
+
+        .cart-items {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 15px;
+            background: var(--bg);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--line);
+        }
+
+        .cart-item img {
+            width: 70px;
+            height: 70px;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+
+        .cart-item-details {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .cart-item-title { font-weight: 700; font-size: 15px; }
+        .cart-item-price { color: var(--y); font-size: 14px; font-weight: 800; }
+
+        .cart-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--card);
+            border-radius: 4px;
+            padding: 4px;
+            width: max-content;
+            border: 1px solid var(--line);
+        }
+
+        .qty-btn {
+            width: 24px; height: 24px;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; background: var(--bg); border-radius: 3px;
+        }
+        .qty-btn:hover { background: var(--y); color: #000; }
+        .qty-val { font-size: 13px; font-weight: bold; width: 15px; text-align: center;}
+
+        .cart-footer {
+            padding: 25px;
+            border-top: 1px solid var(--line);
+            background: var(--bg);
+        }
+
+        .cart-summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 15px;
+            color: var(--muted);
+        }
+
+        .cart-total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 22px;
+            font-weight: 800;
+            color: #fff;
+            border-top: 1px dashed var(--line);
+            padding-top: 15px;
+            margin-top: 10px;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--y);
+            color: #000;
+            font-weight: 800;
+            font-size: 18px;
+            border-radius: 8px;
+            transition: 0.2s;
+        }
+        .checkout-btn:hover { background: #e6b524; transform: translateY(-2px); }
+
+        .empty-cart-msg {
+            text-align: center;
+            color: var(--muted);
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        .empty-cart-msg i { font-size: 40px; opacity: 0.5; }
+
+        /* Custom Modal */
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.8);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 1000; opacity: 0; pointer-events: none; transition: 0.3s;
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        .modal-content {
+            background: var(--card); padding: 40px; border-radius: 12px;
+            text-align: center; border: 1px solid var(--y);
+            transform: translateY(20px); transition: 0.3s; max-width: 400px; width: 90%;
+        }
+        .modal-overlay.active .modal-content { transform: translateY(0); }
+        .modal-content h3 { font: 35px 'Bebas Neue'; color: var(--y); margin: 15px 0; }
+        .modal-content p { color: var(--muted); margin-bottom: 25px; line-height: 1.5; }
+
+        @media(max-width: 990px) {
+            .grid { grid-template-columns: repeat(2, 1fr); }
+            nav { display: none; }
+        }
+        
+        @media(max-width: 768px) {
+            .why { grid-template-columns: 1fr; }
+            .foot { grid-template-columns: 1fr 1fr; }
+            .cta-inner { flex-direction: column; text-align: center; }
+            h1 { font-size: 65px; }
+            .cart-sidebar { width: 100%; border-left: none; }
+        }
+        
+        @media(max-width: 560px) {
+            .grid, .small-grid, .features, .foot { grid-template-columns: 1fr; }
+            .hero { min-height: 600px; background-position: 70%; text-align: center; }
+            .hero p { margin: 20px auto; }
+            .copy { flex-direction: column; gap: 10px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav">
+            <a class="logo" href="#">
+                <i class="fa-solid fa-burger" style="color: var(--y);"></i>
+                SMASHY <span>BURGER</span>
+            </a>
+            
+            <nav>
+                <a href="#home">Home</a>
+                <a href="#menu">Menu</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            
+            <button class="cart-toggle-btn" onclick="toggleCart()">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span id="header-cart-total">0.000 BHD</span>
+                <div class="cart-badge" id="cart-badge" style="display: none;">0</div>
+            </button>
+        </div>
+    </header>
+
+    <main id="home">
+        <section class="hero">
+            <div class="container">
+                <div class="kicker">PREMIUM BURGERS</div>
+                <h1>SMASH IT.<br><span>TASTE IT.</span></h1>
+                <p>Fresh ingredients. Perfectly smashed. That's what makes our burgers different.</p>
+                <a class="btn" href="#menu"><i class="fa-solid fa-utensils"></i> Order Now</a>
+            </div>
+        </section>
+
+        <section class="section container" id="menu">
+            <div class="section-title">
+                <h2>OUR MENU</h2>
+                <p>Real ingredients. Bold flavors.</p>
+            </div>
+            
+            <h3 class="subhead">BURGERS</h3>
+            <div class="grid">
+                <!-- IMPORTANT: Replace image SRCs below with cropped images from the original design image -->
+                
+                <article class="card">
+                    <!-- REPLACE WITH ORIGINAL CROPPED IMAGE -->
+                    <img src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?auto=format&fit=crop&w=700&q=80" alt="Classic Smash">
+                    <div class="card-body">
+                        <h3>CLASSIC SMASH</h3>
+                        <p>Beef patty, American cheese, lettuce, tomato, house sauce.</p>
+                        <div class="card-footer">
+                            <div class="price">2.500 BHD</div>
+                            <button class="add-btn" onclick="addToCart('b1', 'CLASSIC SMASH', 2.500, 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=150&q=80')">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <!-- REPLACE WITH ORIGINAL CROPPED IMAGE -->
+                    <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=700&q=80" alt="Double Smash">
+                    <div class="card-body">
+                        <h3>DOUBLE SMASH</h3>
+                        <p>Two beef patties, double cheese, lettuce, tomato, house sauce.</p>
+                        <div class="card-footer">
+                            <div class="price">3.200 BHD</div>
+                            <button class="add-btn" onclick="addToCart('b2', 'DOUBLE SMASH', 3.200, 'https://images.unsplash.com/photo-1594212686861-5ccf2b1c437a?auto=format&fit=crop&w=150&q=80')">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <!-- REPLACE WITH ORIGINAL CROPPED IMAGE -->
+                    <img src="https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?auto=format&fit=crop&w=700&q=80" alt="Truffle Burger">
+                    <div class="card-body">
+                        <h3>TRUFFLE BURGER</h3>
+                        <p>Beef patty, truffle sauce, caramelized onions, cheese.</p>
+                        <div class="card-footer">
+                            <div class="price">3.800 BHD</div>
+                            <button class="add-btn" onclick="addToCart('b3', 'TRUFFLE BURGER', 3.800, 'https://images.unsplash.com/photo-1586816001966-79b736744398?auto=format&fit=crop&w=150&q=80')">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <!-- REPLACE WITH ORIGINAL CROPPED IMAGE -->
+                    <img src="https://images.unsplash.com/photo-1606755962773-d324e0a13086?auto=format&fit=crop&w=700&q=80" alt="Spicy Chicken">
+                    <div class="card-body">
+                        <h3>SPICY CHICKEN</h3>
+                        <p>Crispy chicken, spicy mayo, lettuce, pickles.</p>
+                        <div class="card-footer">
+                            <div class="price">2.800 BHD</div>
+                            <button class="add-btn" onclick="addToCart('b4', 'SPICY CHICKEN', 2.800, 'https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?auto=format&fit=crop&w=150&q=80')">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <h3 class="subhead">SIDES</h3>
+            <div class="small-grid">
+                <article class="card">
+                    <img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=700&q=80" alt="Loaded Fries">
+                    <div class="card-body">
+                        <h3>Loaded Fries</h3>
+                        <p>Cheese sauce, beef bits, jalapeños.</p>
+                        <div class="card-footer">
+                            <div class="price">1.500 BHD</div>
+                            <button class="add-btn" onclick="addToCart('s1', 'Loaded Fries', 1.500, 'https://images.unsplash.com/photo-1576107232684-1279f390859f?auto=format&fit=crop&w=150&q=80')"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?auto=format&fit=crop&w=700&q=80" alt="Regular Fries">
+                    <div class="card-body">
+                        <h3>Regular Fries</h3>
+                        <p>Crispy and golden.</p>
+                        <div class="card-footer">
+                            <div class="price">0.900 BHD</div>
+                            <button class="add-btn" onclick="addToCart('s2', 'Regular Fries', 0.900, 'https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?auto=format&fit=crop&w=150&q=80')"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="https://images.unsplash.com/photo-1639024471283-03518883512d?auto=format&fit=crop&w=700&q=80" alt="Onion Rings">
+                    <div class="card-body">
+                        <h3>Onion Rings</h3>
+                        <p>Crispy onion rings.</p>
+                        <div class="card-footer">
+                            <div class="price">1.200 BHD</div>
+                            <button class="add-btn" onclick="addToCart('s3', 'Onion Rings', 1.200, 'https://images.unsplash.com/photo-1639024471283-03518883512d?auto=format&fit=crop&w=150&q=80')"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <h3 class="subhead">DRINKS</h3>
+            <div class="small-grid">
+                <article class="card">
+                    <img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=700&q=80" alt="Soft Drink">
+                    <div class="card-body">
+                        <h3>Soft Drink</h3>
+                        <p>Coke / Sprite / Fanta.</p>
+                        <div class="card-footer">
+                            <div class="price">0.500 BHD</div>
+                            <button class="add-btn" onclick="addToCart('d1', 'Soft Drink', 0.500, 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=150&q=80')"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=700&q=80" alt="Iced Tea">
+                    <div class="card-body">
+                        <h3>Iced Tea</h3>
+                        <p>Refreshing & cool.</p>
+                        <div class="card-footer">
+                            <div class="price">0.500 BHD</div>
+                            <button class="add-btn" onclick="addToCart('d2', 'Iced Tea', 0.500, 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=150&q=80')"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="https://images.unsplash.com/photo-1548839140-29a749e1bc4e?auto=format&fit=crop&w=700&q=80" alt="Water">
+                    <div class="card-body">
+                        <h3>Water</h3>
+                        <p>Still / Sparkling.</p>
+                        <div class="card-footer">
+                            <div class="price">0.300 BHD</div>
+                            <button class="add-btn" onclick="addToCart('d3', 'Water', 0.300, 'https://images.unsplash.com/photo-1548839140-29a749e1bc4e?auto=format&fit=crop&w=150&q=80')"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="why" id="about">
+            <div class="why-photo"></div>
+            <div class="why-copy">
+                <div class="kicker">WHY CHOOSE US</div>
+                <h2>QUALITY IN<br>EVERY BITE</h2>
+                <div class="features">
+                    <div class="feature">
+                        <i class="fa-solid fa-leaf"></i>
+                        <b>Fresh Ingredients</b>
+                        <span>Always fresh, always local.</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fa-solid fa-fire"></i>
+                        <b>100% Beef</b>
+                        <span>Premium quality meat.</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fa-solid fa-star"></i>
+                        <b>Great Taste</b>
+                        <span>Big flavor, every time.</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fa-regular fa-heart"></i>
+                        <b>Made with Love</b>
+                        <span>Because you deserve it.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="container cta-inner">
+                <div style="display: flex; gap: 20px; align-items: center;">
+                    <i class="fa-solid fa-burger" style="font-size: 60px; opacity: 0.9;"></i>
+                    <div>
+                        <h2>CRAVING SOMETHING GOOD?</h2>
+                        <p style="font-weight: 600; font-size: 15px;">Order now and enjoy your favorite burgers at home.</p>
+                    </div>
+                </div>
+                <button class="btn dark-btn" onclick="window.scrollTo(0, document.getElementById('menu').offsetTop)">
+                    <i class="fa-solid fa-cart-arrow-down"></i> Order Now
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="foot">
+                <div>
+                    <h3 style="display: flex; align-items: center; gap: 10px;">
+                        <i class="fa-solid fa-burger"></i> SMASHY
+                    </h3>
+                    <p>Smash it. Taste it.</p>
+                    <div style="display: flex; gap: 15px; margin-top: 20px; font-size: 18px;">
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                        <a href="#"><i class="fa-brands fa-snapchat"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Contact Us</h4>
+                    <a href="tel:+97333334444"><i class="fa-solid fa-phone" style="color: var(--y); width: 20px;"></i> +973 3333 4444</a>
+                    <p><i class="fa-solid fa-location-dot" style="color: var(--y); width: 20px;"></i> Manama, Bahrain</p>
+                    <a href="mailto:hello@smashyburger.bh"><i class="fa-solid fa-envelope" style="color: var(--y); width: 20px;"></i> hello@smashyburger.bh</a>
+                </div>
+                <div>
+                    <h4>Opening Hours</h4>
+                    <p><i class="fa-regular fa-clock" style="color: var(--y); width: 20px;"></i> Daily</p>
+                    <p style="padding-left: 25px;">12:00 PM – 12:00 AM</p>
+                </div>
+                <div>
+                    <h4>Find Us</h4>
+                    <div class="map-placeholder">
+                        <span style="background: rgba(0,0,0,0.6); padding: 5px 10px; border-radius: 4px; font-size: 12px;">Map Placeholder</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copy">
+                <span>© 2026 Smashy Burger. All rights reserved.</span>
+                <span style="font-style: italic;">Smash It. Taste It.</span>
+            </div>
+        </div>
+    </footer>
+
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2><i class="fa-solid fa-cart-shopping"></i> Your Cart</h2>
+            <button class="close-cart" onclick="toggleCart()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        
+        <div class="cart-items" id="cartItems">
+            <!-- Items injected via JS -->
+            <div class="empty-cart-msg" id="emptyCartMsg">
+                <i class="fa-solid fa-basket-shopping"></i>
+                <p>Your cart is currently empty.</p>
+            </div>
+        </div>
+
+        <div class="cart-footer">
+            <div class="cart-summary-row">
+                <span>Subtotal</span>
+                <span id="cart-subtotal">0.000 BHD</span>
+            </div>
+            <div class="cart-summary-row">
+                <span>Delivery</span>
+                <span>Calculated at checkout</span>
+            </div>
+            <div class="cart-total-row">
+                <span>Total</span>
+                <span id="cart-total-price">0.000 BHD</span>
+            </div>
+            <button class="checkout-btn" onclick="openCheckout()">Checkout →</button>
+        </div>
+    </div>
+
+    <!-- Custom Alert / Message Modal -->
+    <div class="modal-overlay" id="msgModal">
+        <div class="modal-content">
+            <i class="fa-solid fa-circle-check" style="font-size: 50px; color: var(--y);"></i>
+            <h3>Order Received!</h3>
+            <p id="msgText">Thank you for your order. We are preparing your delicious food.</p>
+            <button class="btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // State
+        let cart = [];
+        const deliveryFee = 0.500; // Example delivery fee
+
+        // DOM Elements
+        const cartSidebar = document.getElementById('cartSidebar');
+        const cartOverlay = document.getElementById('cartOverlay');
+        const cartItemsContainer = document.getElementById('cartItems');
+        const emptyCartMsg = document.getElementById('emptyCartMsg');
+        
+        const headerCartTotal = document.getElementById('header-cart-total');
+        const cartBadge = document.getElementById('cart-badge');
+        
+        const cartSubtotalEl = document.getElementById('cart-subtotal');
+        const cartTotalPriceEl = document.getElementById('cart-total-price');
+
+        const msgModal = document.getElementById('msgModal');
+        const msgText = document.getElementById('msgText');
+
+        // Toggle Sidebar
+        function toggleCart() {
+            cartSidebar.classList.toggle('active');
+            cartOverlay.classList.toggle('active');
+        }
+
+        // Add to Cart
+        function addToCart(id, name, price, img) {
+            const existingItem = cart.find(item => item.id === id);
+            if (existingItem) {
+                existingItem.qty += 1;
+            } else {
+                cart.push({ id, name, price, img, qty: 1 });
+            }
+            
+            // Visual feedback (Open cart on first add)
+            renderCart();
+            if(!cartSidebar.classList.contains('active')) {
+                toggleCart();
+            }
+        }
+
+        // Update Quantity
+        function updateQty(id, change) {
+            const index = cart.findIndex(item => item.id === id);
+            if (index > -1) {
+                cart[index].qty += change;
+                if (cart[index].qty <= 0) {
+                    cart.splice(index, 1); // Remove item
+                }
+                renderCart();
+            }
+        }
+
+        // Render Cart UI
+        function renderCart() {
+            let totalQty = 0;
+            let subtotal = 0;
+            
+            // Clear items (except empty message)
+            const elementsToRemove = cartItemsContainer.querySelectorAll('.cart-item');
+            elementsToRemove.forEach(el => el.remove());
+
+            if (cart.length === 0) {
+                emptyCartMsg.style.display = 'flex';
+                cartBadge.style.display = 'none';
+            } else {
+                emptyCartMsg.style.display = 'none';
+                cartBadge.style.display = 'flex';
+                
+                cart.forEach(item => {
+                    totalQty += item.qty;
+                    subtotal += (item.price * item.qty);
+
+                    const itemEl = document.createElement('div');
+                    itemEl.className = 'cart-item';
+                    itemEl.innerHTML = `
+                        <img src="${item.img}" alt="${item.name}">
+                        <div class="cart-item-details">
+                            <div class="cart-item-title">${item.name}</div>
+                            <div class="cart-item-price">${(item.price * item.qty).toFixed(3)} BHD</div>
+                            <div class="cart-controls">
+                                <button class="qty-btn" onclick="updateQty('${item.id}', -1)">-</button>
+                                <span class="qty-val">${item.qty}</span>
+                                <button class="qty-btn" onclick="updateQty('${item.id}', 1)">+</button>
+                            </div>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(itemEl);
+                });
+            }
+
+            // Update Badges & Totals
+            cartBadge.innerText = totalQty;
+            headerCartTotal.innerText = `${subtotal.toFixed(3)} BHD`;
+            cartSubtotalEl.innerText = `${subtotal.toFixed(3)} BHD`;
+            
+            const finalTotal = subtotal > 0 ? (subtotal + deliveryFee) : 0;
+            cartTotalPriceEl.innerText = `${finalTotal.toFixed(3)} BHD`;
+        }
+
+        // Checkout Logic (using Custom Modal)
+        function openCheckout() {
+            if (cart.length === 0) {
+                msgText.innerText = "Please add items to your cart before checking out.";
+                msgModal.querySelector('i').className = "fa-solid fa-triangle-exclamation";
+                msgModal.querySelector('i').style.color = "#ff4444";
+                msgModal.querySelector('h3').innerText = "Cart Empty";
+            } else {
+                const final = document.getElementById('cart-total-price').innerText;
+                msgText.innerText = `Your order total is ${final}. Thank you for choosing Smashy Burger!`;
+                msgModal.querySelector('i').className = "fa-solid fa-circle-check";
+                msgModal.querySelector('i').style.color = "var(--y)";
+                msgModal.querySelector('h3').innerText = "Order Received!";
+                
+                // Reset cart on successful checkout
+                cart = [];
+                renderCart();
+            }
+            
+            // Close sidebar and open modal
+            cartSidebar.classList.remove('active');
+            cartOverlay.classList.remove('active');
+            msgModal.classList.add('active');
+        }
+
+        function closeModal() {
+            msgModal.classList.remove('active');
+        }
+
+        // Close modal on outside click
+        msgModal.addEventListener('click', function(e) {
+            if(e.target === msgModal) {
+                closeModal();
+            }
+        });
+
+    </script>
+</body>
+</html>
